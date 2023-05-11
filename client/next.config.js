@@ -6,18 +6,18 @@ const nextConfig = {
     APP_ENV: process.env.NEXT_PUBLIC_ENV,
   },
   //перезаписываем пути для бекенда
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: `http://localhost:4200/api/:path*`,
-      },
-      {
-        source: '/uploads/:path*',
-        destination: `http://localhost:4200/uploads/:path*`,
-      },
-    ]
-  },
+  // async rewrites() {
+  //   return [
+  //     // {
+  //     //   source: '/api/:path*',
+  //     //   destination: `http://localhost:4200/api/:path*`,
+  //     // },
+  //     {
+  //       source: '/uploads/:path*',
+  //       destination: `http://localhost:4200/uploads/:path*`,
+  //     },
+  //   ]
+  // },
 }
 
 module.exports = nextConfig
