@@ -9,19 +9,17 @@ import { MovieService } from '@/services/movie.service'
 export const useSearch = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const debouncedSearch = useDebounce(searchTerm, 500)
-  console.log('🚀 ~ debouncedSearch:', !!debouncedSearch)
 
   /**тут внимание сделан запрос с использованием аргумента debouncedSearch
    *поэтому указываем именно массив с жданными куда и помешаем наш аргумент*/
   const { isSuccess, data } = useQuery(
     ['search movie list', debouncedSearch],
-    () => {
+    () =>
       //тут сделан get запрос и использованием параметра для поиска
       MovieService.getMovies(debouncedSearch),
-        {
-          select: ({ data }: any) => data,
-          enabled: !!debouncedSearch // это показывает что будет включено только при наличии debouncedSearch
-        }
+    {
+      select: ({ data }: any) => data,
+      enabled: !!debouncedSearch // это показывает что будет включено только при наличии debouncedSearch
     }
   )
 

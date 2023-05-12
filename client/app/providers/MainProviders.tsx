@@ -8,6 +8,7 @@ import Layout from '@/components/layout/Layout'
 import { store } from '@/store/store'
 
 import ReduxToastrMesage from './ReduxToastrMesage'
+import HeadProvider from './head-provider/HeadProvider'
 
 //подключение  react-query
 const queryClient = new QueryClient({
@@ -23,17 +24,20 @@ const queryClient = new QueryClient({
 const MainProviders: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
-      {/* Provider- подключение toolkit */}
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          {/* подключаем наш компонент который отвечает за вывод сообщений */}
-          <ReduxToastrMesage />
-          <Layout>{children}</Layout>
-        </QueryClientProvider>
-        {/* включение панели разработчика */}
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-        {/* Опционально: настройка панели разработчика */}
-      </Provider>
+      {/* тут добавляем HeadProvider это наш прогресс загрузки страницы красивый */}
+      <HeadProvider>
+        {/* Provider- подключение toolkit */}
+        <Provider store={store}>
+          <QueryClientProvider client={queryClient}>
+            {/* подключаем наш компонент который отвечает за вывод сообщений */}
+            <ReduxToastrMesage />
+            <Layout>{children}</Layout>
+          </QueryClientProvider>
+          {/* включение панели разработчика */}
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          {/* Опционально: настройка панели разработчика */}
+        </Provider>
+      </HeadProvider>
     </>
   )
 }
