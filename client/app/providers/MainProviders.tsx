@@ -1,9 +1,15 @@
 import { FC, PropsWithChildren } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { Provider } from 'react-redux'
 
 import Layout from '@/components/layout/Layout'
 
+import { store } from '@/store/store'
+
+import ReduxToastrMesage from './ReduxToastrMesage'
+
+//подключение  react-query
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -17,12 +23,17 @@ const queryClient = new QueryClient({
 const MainProviders: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <Layout>{children}</Layout>
-      </QueryClientProvider>
-      {/* включение панели разработчика */}
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-      {/* Опционально: настройка панели разработчика */}
+      {/* Provider- подключение toolkit */}
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          {/* подключаем наш компонент который отвечает за вывод сообщений */}
+          <ReduxToastrMesage />
+          <Layout>{children}</Layout>
+        </QueryClientProvider>
+        {/* включение панели разработчика */}
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        {/* Опционально: настройка панели разработчика */}
+      </Provider>
     </>
   )
 }
