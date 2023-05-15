@@ -16,8 +16,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
-    "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@tailwindcss/forms": "^0.5.3",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/node": "18.16.3",
     "@types/react": "18.2.0",
@@ -25,10 +23,12 @@
     "@types/react-redux-toastr": "^7.6.2",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
+    "js-cookie": "^3.0.5",
     "next": "13.3.4",
     "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
     "react-loading-skeleton": "^3.3.1",
     "react-query": "^3.39.3",
@@ -38,6 +38,9 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.3",
+    "@types/js-cookie": "^3.0.3",
     "autoprefixer": "^10.4.14",
     "concurrently": "^8.0.1",
     "postcss": "^8.4.23",

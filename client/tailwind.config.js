@@ -80,8 +80,8 @@ module.exports = {
   },
 
   plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/forms'), // ставятся отдельно через npm
+    require('@tailwindcss/aspect-ratio'),// ставятся отдельно через npm
     plugin(({ addComponents, theme, addUtilities }) => {
       // тут описываем конретные компоненты в нашем случае это кнопка
       addComponents({
