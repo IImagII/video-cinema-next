@@ -10,8 +10,8 @@ export const useAuthRedirect = () => {
   /**query - это query параметр, push- для переадрисации */
   const { query, push } = useRouter()
 
-  //тут будет кидать на главную страницу
-  const redirect = String(query.redirect) || '/'
+  //тут будет кидать на главную страницу после того как мы войдем в истему тоеть зарегестрируемся
+  const redirect = query.redirect ? String(query.redirect) : '/'
 
   useEffect(() => {
     /**тут будет отслеживаться и если у нас пользователь

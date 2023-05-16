@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import Button from '@/components/ui/form-elements/Button'
 import Heading from '@/components/ui/heading/Heading'
 
+import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
 
 import Meta from '@/utils/meta/Meta'
@@ -30,13 +31,8 @@ const Auth: FC = () => {
     mode: 'onChange' // будет выводить ошибку при каждом изменении полей
   })
 
-  //тут указываем action которые берутся из redux
-  const login = (data: any) => {
-    console.log('login', data)
-  }
-  const register = (data: any) => {
-    console.log('register', data)
-  }
+  //через наш кастомный хук сразу пишем вместо dispatch(login()) или  dispatch(register()) получаем actions
+  const { login, register } = useActions()
 
   //сама функция выполнения валидации
   const onSubmit: SubmitHandler<IAuthInput> = (data) => {

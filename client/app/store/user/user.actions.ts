@@ -38,7 +38,7 @@ export const login = createAsyncThunk<IAuthResponse, IEmailPassword>(
   'auth/login',
   async ({ email, password }, thunkApi) => {
     try {
-      const response = await AuthService.register(email, password)
+      const response = await AuthService.login(email, password)
       toastr.success('Login', 'Авторизация успешна')
 
       return response
@@ -57,7 +57,7 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 })
 
 //делаем запрос на проверку данных при первом заходе в приложение
-export const checkAuth = createAsyncThunk<IAuthResponse, IEmailPassword>(
+export const checkAuth = createAsyncThunk<IAuthResponse>(
   /**первый дженерик показывает чтоы вернет нам запрос с сервера  у нас это IAuthResponse
    * IEmailPassword - это типизация того что мы передаем в запрос
    */

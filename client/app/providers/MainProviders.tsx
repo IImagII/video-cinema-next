@@ -1,13 +1,15 @@
 import { FC, PropsWithChildren } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
 import { Provider } from 'react-redux'
 
 import Layout from '@/components/layout/Layout'
 
+import { TypeComponentAuthFields } from '@/shared/types/auth.types'
+
 import { store } from '@/store/store'
 
 import ReduxToastrMesage from './ReduxToastrMesage'
+import AuthProvider from './auth-provider/AuthProvider'
 import HeadProvider from './head-provider/HeadProvider'
 
 //подключение  react-query
@@ -21,7 +23,10 @@ const queryClient = new QueryClient({
 })
 
 //тут у нас будет подключаться ве наши провайдеры это сделано для улучшения читабельности
-const MainProviders: FC<PropsWithChildren> = ({ children }) => {
+const MainProviders: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
+  children,
+  Component
+}) => {
   return (
     <>
       {/* тут добавляем HeadProvider это наш прогресс загрузки страницы красивый */}
@@ -31,7 +36,11 @@ const MainProviders: FC<PropsWithChildren> = ({ children }) => {
           <QueryClientProvider client={queryClient}>
             {/* подключаем наш компонент который отвечает за вывод сообщений */}
             <ReduxToastrMesage />
-            <Layout>{children}</Layout>
+            {/* это наш кастомный провайдер который следит за ролями в приложении  */}
+            {/* Component берем из файла pages/_app.tsx */}
+            <AuthProvider Component={Component}>
+              <Layout>{children}</Layout>
+            </AuthProvider>
           </QueryClientProvider>
           {/* включение панели разработчика */}
           {/* <ReactQueryDevtools initialIsOpen={false} /> */}

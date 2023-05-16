@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { getStoreLocal } from '@/utils/local-storage'
 
-import { checkAuth, login, register } from './user.actions'
+import { checkAuth, login, logout, register } from './user.actions'
 import { IInitialState } from './user.interface'
 
 const initialState: IInitialState = {
@@ -41,7 +41,7 @@ export const userSlice = createSlice({
         state.user = null
       })
       //тут берем logout
-      .addCase(login.fulfilled, (state) => {
+      .addCase(logout.fulfilled, (state) => {
         state.isLoading = false
         state.user = null
       })
