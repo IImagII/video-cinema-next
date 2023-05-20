@@ -1,3 +1,5 @@
+import Movies from '@/components/screens/home/movies/Movies'
+
 import { NextPageAuth } from '@/shared/types/auth.types'
 
 const MoviesPage: NextPageAuth = () => {

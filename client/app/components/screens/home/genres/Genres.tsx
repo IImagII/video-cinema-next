@@ -16,9 +16,9 @@ const Genres: FC = () => {
   const { handleSearch, isLoading, searchTerm, data, deleteAsync } = useGenres()
 
   return (
-    <Meta title="Users">
+    <Meta title="Genres">
       <AdminNavigation />
-      <Heading title="Users" />
+      <Heading title="Genres" />
 
       <AdminHeader searchTerm={searchTerm} handleSearch={handleSearch} />
 
@@ -28,7 +28,7 @@ const Genres: FC = () => {
       <AdminTable
         isLoading={isLoading}
         removeHandler={deleteAsync}
-        headerItems={['Email', 'Date register']}
+        headerItems={['Name', 'Slug']}
         tableItems={data || []}
       />
     </Meta>

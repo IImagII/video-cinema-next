@@ -7,7 +7,7 @@ import { ITableItem } from '@/components/ui/admin-table/admin-table.interface'
 
 import { useDebounce } from '@/hooks/useDebounce'
 
-import { UserService } from '@/services/user.service'
+import { ActorService } from '@/services/actor.service'
 
 import { convertMongoDate } from '@/utils/date/convertMongoDate'
 import { toastError } from '@/utils/toast-error'
@@ -18,22 +18,22 @@ export const useActors = () => {
 
   //это запрос на получение users согласно нашему условию поиска
   const queryData = useQuery(
-    ['user list', debouncedSearch],
-    () => UserService.getAll(debouncedSearch),
+    ['actor list', debouncedSearch],
+    () => ActorService.getAll(debouncedSearch),
     {
       //туту модифицируем наши приходящие данные
       select: ({ data }) =>
         /**нам нужно сделать выборку и трансформировать под нашу таблицу */
         data.map(
-          (user): ITableItem => ({
-            _id: user._id,
-            editUrl: getAdminUrl(`user/edit/${user._id}`),
+          (actor): ITableItem => ({
+            _id: actor._id,
+            editUrl: getAdminUrl(`actor/edit/${actor._id}`),
             //мы делаем свой массив с преобразованием в нужный нам формат
-            items: [user.email, convertMongoDate(user.createdAt)]
+            items: [actor.name, String(actor.countMovies)]
           })
         ),
       onError(error) {
-        toastError(error, 'user list')
+        toastError(error, 'actor list')
       }
     }
   )
@@ -45,15 +45,15 @@ export const useActors = () => {
 
   //делаем запрос на удаления users
   const { mutateAsync: deleteAsync } = useMutation(
-    'delete user',
-    (userId: string) => UserService.deleteUser(userId),
+    'delete actor',
+    (actorId: string) => ActorService.deleteActor(actorId),
     {
       onError: (error) => {
         toastError(error, 'Delete user')
       },
       //будет происходить при удачном удалении
       onSuccess: () => {
-        toastr.success('Delete user', 'delete was successful')
+        toastr.success('Delete actor', 'delete was successful')
         queryData.refetch() // обновляем те данные который мы получили запросом выше чтобы данные сразу же обновились
       }
     }

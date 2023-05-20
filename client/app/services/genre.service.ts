@@ -1,4 +1,4 @@
-import { axiosClassic } from 'api/interseptors'
+import axios, { axiosClassic } from 'api/interseptors'
 
 import { IGenre } from '@/shared/types/movie.types'
 
@@ -13,6 +13,11 @@ export const GenreService = {
           }
         : {}
     })
+  },
+
+  //запросна удаление genres
+  async deleteGenre(_id: string) {
+    return axios.delete<string>(getGenresUrl(`/${_id}`))
   }
 }
 /** 

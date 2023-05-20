@@ -1,4 +1,5 @@
 import { axiosClassic } from 'api/interseptors'
+import axios from 'api/interseptors'
 import { getMoviesUrl } from 'config/api.config'
 
 import { IMovie } from '@/shared/types/movie.types'
@@ -21,5 +22,10 @@ export const MovieService = {
       getMoviesUrl('/most-popular')
     )
     return movies
+  },
+
+  //запросна удаление movies
+  async deleteMovie(_id: string) {
+    return axios.delete<string>(getMoviesUrl(`/${_id}`))
   }
 }

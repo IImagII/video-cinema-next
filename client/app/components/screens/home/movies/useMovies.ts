@@ -7,33 +7,38 @@ import { ITableItem } from '@/components/ui/admin-table/admin-table.interface'
 
 import { useDebounce } from '@/hooks/useDebounce'
 
-import { UserService } from '@/services/user.service'
+import { MovieService } from '@/services/movie.service'
 
 import { convertMongoDate } from '@/utils/date/convertMongoDate'
+import { getGenresList } from '@/utils/movie/getGenresListEach'
 import { toastError } from '@/utils/toast-error'
 
 export const useMovies = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const debouncedSearch = useDebounce(searchTerm, 500)
 
-  //это запрос на получение users согласно нашему условию поиска
+  //это запрос на получение movies согласно нашему условию поиска
   const queryData = useQuery(
     ['user list', debouncedSearch],
-    () => UserService.getAll(debouncedSearch),
+    () => MovieService.getMovies(debouncedSearch),
     {
       //туту модифицируем наши приходящие данные
       select: ({ data }) =>
         /**нам нужно сделать выборку и трансформировать под нашу таблицу */
         data.map(
-          (user): ITableItem => ({
-            _id: user._id,
-            editUrl: getAdminUrl(`user/edit/${user._id}`),
+          (movie): ITableItem => ({
+            _id: movie._id,
+            editUrl: getAdminUrl(`movie/edit/${movie._id}`),
             //мы делаем свой массив с преобразованием в нужный нам формат
-            items: [user.email, convertMongoDate(user.createdAt)]
+            items: [
+              movie.title,
+              getGenresList(movie.genres),
+              String(movie.rating)
+            ]
           })
         ),
       onError(error) {
-        toastError(error, 'user list')
+        toastError(error, 'movie list')
       }
     }
   )
@@ -43,17 +48,17 @@ export const useMovies = () => {
     setSearchTerm(e.target.value)
   }
 
-  //делаем запрос на удаления users
+  //делаем запрос на удаления movies
   const { mutateAsync: deleteAsync } = useMutation(
-    'delete user',
-    (userId: string) => UserService.deleteUser(userId),
+    'delete movie',
+    (movieId: string) => MovieService.deleteMovie(movieId),
     {
       onError: (error) => {
-        toastError(error, 'Delete user')
+        toastError(error, 'Delete movie')
       },
       //будет происходить при удачном удалении
       onSuccess: () => {
-        toastr.success('Delete user', 'delete was successful')
+        toastr.success('Delete movie', 'delete was successful')
         queryData.refetch() // обновляем те данные который мы получили запросом выше чтобы данные сразу же обновились
       }
     }

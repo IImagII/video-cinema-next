@@ -10,15 +10,15 @@ import AdminNavigation from '../../../ui/admin-navigation/AdminNavigation'
 
 import { useMovies } from './useMovies'
 
-//компонент который оотбражает users в системе и отображаетих и удаляет- это для admin
+//компонент который оотбражает movie в системе и отображаетих и удаляет- это для admin
 const Movies: FC = () => {
   //мы всю логикуперенесли в кастомный хук там находиться логика по запросам
   const { handleSearch, isLoading, searchTerm, data, deleteAsync } = useMovies()
 
   return (
-    <Meta title="Users">
+    <Meta title="Movies">
       <AdminNavigation />
-      <Heading title="Users" />
+      <Heading title="Movies" />
 
       <AdminHeader searchTerm={searchTerm} handleSearch={handleSearch} />
 
@@ -28,7 +28,7 @@ const Movies: FC = () => {
       <AdminTable
         isLoading={isLoading}
         removeHandler={deleteAsync}
-        headerItems={['Email', 'Date register']}
+        headerItems={['Title', 'Genres', 'Rating']}
         tableItems={data || []}
       />
     </Meta>

@@ -4,9 +4,9 @@ import AdminTable from '@/components/ui/admin-table/AdminTable'
 import AdminHeader from '@/components/ui/admin-table/admin-header-table/AdminHeader'
 import Heading from '@/components/ui/heading/Heading'
 
-import Meta from '@/utils/meta/Meta'
+import AdminNavigation from '@/ui/admin-navigation/AdminNavigation'
 
-import AdminNavigation from '../../../ui/admin-navigation/AdminNavigation'
+import Meta from '@/utils/meta/Meta'
 
 import { useActors } from './useActors'
 
@@ -16,9 +16,9 @@ const Actors: FC = () => {
   const { handleSearch, isLoading, searchTerm, data, deleteAsync } = useActors()
 
   return (
-    <Meta title="Users">
+    <Meta title="Actors">
       <AdminNavigation />
-      <Heading title="Users" />
+      <Heading title="Actors" />
 
       <AdminHeader searchTerm={searchTerm} handleSearch={handleSearch} />
 
@@ -28,7 +28,7 @@ const Actors: FC = () => {
       <AdminTable
         isLoading={isLoading}
         removeHandler={deleteAsync}
-        headerItems={['Email', 'Date register']}
+        headerItems={['Name', 'Count movies']}
         tableItems={data || []}
       />
     </Meta>
