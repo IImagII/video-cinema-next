@@ -4,4 +4,4 @@ export const getGenreUrl = (slug: string) => `/genre/${slug}` //использу
 export const getActorUrl = (slug: string) => `/actor/${slug}`
 
 export const getAdminUrl = (url: string) => `/admin/${url}`
-export const getAdminHomeUrl = () => getAdminUrl('').slice(0, -1)
+export const getAdminHomeUrl = () => getAdminUrl('').slice(0, -1) // это главная страница
