@@ -6,19 +6,19 @@ import Heading from '@/components/ui/heading/Heading'
 
 import Meta from '@/utils/meta/Meta'
 
-import AdminNavigation from '../../../ui/admin-navigation/AdminNavigation'
+import AdminNavigation from '../../../../ui/admin-navigation/AdminNavigation'
 
-import { useUsers } from './useUsers'
+import { useGenres } from './useGenres'
 
 //компонент который оотбражает users в системе и отображаетих и удаляет- это для admin
-const Users: FC = () => {
+const Genres: FC = () => {
   //мы всю логикуперенесли в кастомный хук там находиться логика по запросам
-  const { handleSearch, isLoading, searchTerm, data, deleteAsync } = useUsers()
+  const { handleSearch, isLoading, searchTerm, data, deleteAsync } = useGenres()
 
   return (
-    <Meta title="Users">
+    <Meta title="Genres">
       <AdminNavigation />
-      <Heading title="Users" />
+      <Heading title="Genres" />
 
       <AdminHeader searchTerm={searchTerm} handleSearch={handleSearch} />
 
@@ -28,11 +28,11 @@ const Users: FC = () => {
       <AdminTable
         isLoading={isLoading}
         removeHandler={deleteAsync}
-        headerItems={['Email', 'Date register']}
+        headerItems={['Name', 'Slug']}
         tableItems={data || []}
       />
     </Meta>
   )
 }
 
-export default Users
+export default Genres

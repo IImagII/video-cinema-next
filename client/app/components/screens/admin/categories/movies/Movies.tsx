@@ -6,19 +6,19 @@ import Heading from '@/components/ui/heading/Heading'
 
 import Meta from '@/utils/meta/Meta'
 
-import AdminNavigation from '../../../ui/admin-navigation/AdminNavigation'
+import AdminNavigation from '../../../../ui/admin-navigation/AdminNavigation'
 
-import { useGenres } from './useGenres'
+import { useMovies } from './useMovies'
 
-//компонент который оотбражает users в системе и отображаетих и удаляет- это для admin
-const Genres: FC = () => {
+//компонент который оотбражает movie в системе и отображаетих и удаляет- это для admin
+const Movies: FC = () => {
   //мы всю логикуперенесли в кастомный хук там находиться логика по запросам
-  const { handleSearch, isLoading, searchTerm, data, deleteAsync } = useGenres()
+  const { handleSearch, isLoading, searchTerm, data, deleteAsync } = useMovies()
 
   return (
-    <Meta title="Genres">
+    <Meta title="Movies">
       <AdminNavigation />
-      <Heading title="Genres" />
+      <Heading title="Movies" />
 
       <AdminHeader searchTerm={searchTerm} handleSearch={handleSearch} />
 
@@ -28,11 +28,11 @@ const Genres: FC = () => {
       <AdminTable
         isLoading={isLoading}
         removeHandler={deleteAsync}
-        headerItems={['Name', 'Slug']}
+        headerItems={['Title', 'Genres', 'Rating']}
         tableItems={data || []}
       />
     </Meta>
   )
 }
 
-export default Genres
+export default Movies

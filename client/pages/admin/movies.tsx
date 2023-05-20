@@ -1,4 +1,4 @@
-import Movies from '@/components/screens/home/movies/Movies'
+import Movies from '@/components/screens/admin/categories/movies/Movies'
 
 import { NextPageAuth } from '@/shared/types/auth.types'
 
