@@ -45,7 +45,7 @@ export const useGenres = () => {
   //делаем запрос на удаления genre
   const { mutateAsync: deleteAsync } = useMutation(
     'delete genre',
-    (genreId: string) => GenreService.deleteGenre(genreId),
+    (genreId: string) => GenreService.delete(genreId),
     {
       onError: (error) => {
         toastError(error, 'Delete genre')
